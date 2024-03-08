@@ -3,7 +3,6 @@ package com.cp.borutoapp.di
 import android.content.Context
 import androidx.room.Room
 import com.cp.borutoapp.data.local.BorutoDatabase
-import com.cp.borutoapp.data.local.HeroDao
 import com.cp.borutoapp.util.Constant.BORUTO_DATABASE
 import dagger.Module
 import dagger.Provides
