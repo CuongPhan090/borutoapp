@@ -1,4 +1,4 @@
-package com.cp.borutoapp.presentation
+package com.cp.borutoapp.presentation.screen
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.core.Animatable
@@ -19,12 +19,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
 import com.cp.borutoapp.R
 import com.cp.borutoapp.ui.theme.Purple500
 import com.cp.borutoapp.ui.theme.Purple700
 
 @Composable
-fun SplashScreen() {
+fun SplashScreen(navController: NavHostController) {
     val rotationDegree = setupAnimation()
     Splash(rotationDegree)
 }
