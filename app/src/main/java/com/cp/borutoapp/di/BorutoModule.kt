@@ -3,6 +3,8 @@ package com.cp.borutoapp.di
 import android.content.Context
 import androidx.room.Room
 import com.cp.borutoapp.data.local.BorutoDatabase
+import com.cp.borutoapp.data.repository.DataStoreOperationImpl
+import com.cp.borutoapp.data.repository.DataStoreOperations
 import com.cp.borutoapp.util.Constant.BORUTO_DATABASE
 import dagger.Module
 import dagger.Provides
@@ -19,5 +21,11 @@ object BorutoModule {
     @Singleton
     fun provideBorutoDatabase(@ApplicationContext context: Context): BorutoDatabase {
         return Room.databaseBuilder(context, BorutoDatabase::class.java, BORUTO_DATABASE).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDataStoreOperation(@ApplicationContext context: Context): DataStoreOperations {
+        return DataStoreOperationImpl(context = context)
     }
 }

@@ -90,4 +90,6 @@ dependencies {
     implementation("androidx.paging:paging-runtime:3.2.1")
     implementation("androidx.paging:paging-compose:3.3.0-alpha04")
 
+    // DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }

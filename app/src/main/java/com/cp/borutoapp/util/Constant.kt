@@ -8,4 +8,6 @@ object Constant {
     const val BORUTO_DATABASE = "boruto_database"
 
     const val SEPARATOR_DATABASE_TYPE_CONVERTER = ","
+
+    const val DATA_STORE_OPERATIONS = "data_store_operations"
 }
