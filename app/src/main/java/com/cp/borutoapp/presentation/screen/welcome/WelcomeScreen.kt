@@ -1,4 +1,4 @@
-package com.cp.borutoapp.presentation.screen
+package com.cp.borutoapp.presentation.screen.welcome
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.AnimatedVisibility
@@ -33,9 +33,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.cp.borutoapp.R
+import com.cp.borutoapp.navigation.Screen
 import com.cp.borutoapp.presentation.model.OnBoardingPage
 import com.cp.borutoapp.ui.theme.EXTRA_LARGE_PADDING
 import com.cp.borutoapp.ui.theme.LARGE_PADDING
@@ -50,7 +52,10 @@ import com.cp.borutoapp.ui.theme.welcomeScreenBackgroundColor
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun WelcomeScreen(navController: NavHostController) {
+fun WelcomeScreen(
+    navController: NavHostController,
+    welcomeViewModel: WelcomeViewModel = hiltViewModel()
+) {
     val onboardingPages = listOf(OnBoardingPage.First, OnBoardingPage.Second, OnBoardingPage.Third)
 
     val pagerState = rememberPagerState {
@@ -68,7 +73,9 @@ fun WelcomeScreen(navController: NavHostController) {
         }
         HorizontalPagerIndicator(pagerState = pagerState)
         CompleteOnBoardingButton(pagerState = pagerState) {
-
+            navController.popBackStack()
+            navController.navigate(route = Screen.Home.route)
+            welcomeViewModel.saveOnBoardingState(completed = true)
         }
     }
 }
