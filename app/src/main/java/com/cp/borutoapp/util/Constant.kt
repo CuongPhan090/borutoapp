@@ -10,4 +10,6 @@ object Constant {
     const val SEPARATOR_DATABASE_TYPE_CONVERTER = ","
 
     const val DATA_STORE_OPERATIONS = "data_store_operations"
+
+    const val BASE_URL = "localhost:8080"
 }

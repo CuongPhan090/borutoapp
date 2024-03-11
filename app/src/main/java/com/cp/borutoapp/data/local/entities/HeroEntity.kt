@@ -1,11 +1,11 @@
-package com.cp.borutoapp.data.model
+package com.cp.borutoapp.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.cp.borutoapp.util.Constant.HERO_DATABASE_TABLE
 
 @Entity(tableName = HERO_DATABASE_TABLE)
-data class Hero(
+data class HeroEntity(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     val name: String,
