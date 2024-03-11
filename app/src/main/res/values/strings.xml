@@ -3,4 +3,5 @@
     <string name="app_logo">app logo</string>
     <string name="on_boarding_image">on boarding image</string>
     <string name="finish">Finish</string>
+    <string name="search_icon">search icon</string>
 </resources>
