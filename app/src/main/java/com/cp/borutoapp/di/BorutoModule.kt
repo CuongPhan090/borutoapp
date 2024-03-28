@@ -8,9 +8,10 @@ import com.cp.borutoapp.data.repository.BorutoRepository
 import com.cp.borutoapp.data.repository.BorutoRepositoryImpl
 import com.cp.borutoapp.data.repository.DataStoreOperationImpl
 import com.cp.borutoapp.data.repository.DataStoreOperations
+import com.cp.borutoapp.data.repository.RemoteDataSource
+import com.cp.borutoapp.data.repository.RemoteDataSourceImpl
 import com.cp.borutoapp.util.Constant.BASE_URL
 import com.cp.borutoapp.util.Constant.BORUTO_DATABASE
-import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +20,6 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.create
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -41,8 +41,14 @@ object BorutoModule {
 
     @Provides
     @Singleton
-    fun provideBorutoRepository(dataStoreOperationsImpl: DataStoreOperations): BorutoRepository {
-        return BorutoRepositoryImpl(dataStoreOperations = dataStoreOperationsImpl)
+    fun provideBorutoRepository(
+        dataStoreOperationsImpl: DataStoreOperations,
+        remoteDataSource: RemoteDataSource
+    ): BorutoRepository {
+        return BorutoRepositoryImpl(
+            dataStoreOperations = dataStoreOperationsImpl,
+            remoteDataSource = remoteDataSource
+        )
     }
 
     @Provides
@@ -68,5 +74,17 @@ object BorutoModule {
     @Singleton
     fun provideBorutoApi(retrofit: Retrofit): BorutoApi {
         return retrofit.create(BorutoApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(
+        borutoDatabase: BorutoDatabase,
+        borutoApi: BorutoApi
+    ): RemoteDataSource {
+        return RemoteDataSourceImpl(
+            borutoDatabase = borutoDatabase,
+            borutoApi = borutoApi
+        )
     }
 }

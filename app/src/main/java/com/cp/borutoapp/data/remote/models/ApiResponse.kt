@@ -1,5 +1,7 @@
 package com.cp.borutoapp.data.remote.models
 
+import com.cp.borutoapp.data.local.entities.HeroEntity
+import com.cp.borutoapp.data.local.entities.HeroRemoteKeyEntity
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
@@ -25,3 +27,26 @@ data class HeroResponse(
     val abilities: List<String>,
     val natureTypes: List<String>
 )
+
+fun HeroResponse.toHeroEntity() = HeroEntity(
+    id = id,
+    name = name,
+    image = image,
+    about = about,
+    rating = rating,
+    power = power,
+    month = month,
+    day = day,
+    family = family,
+    abilities = abilities,
+    natureTypes = natureTypes
+)
+
+fun ApiResponse.toListOfHeroRemoteKeyEntity() =
+    heroes.map {
+        HeroRemoteKeyEntity(
+            id = it.id,
+            prevPage = this.prevPage,
+            nextPage = this.nextPage
+        )
+    }
