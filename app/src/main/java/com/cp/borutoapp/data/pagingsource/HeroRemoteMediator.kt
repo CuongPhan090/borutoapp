@@ -49,7 +49,7 @@ class HeroRemoteMediator @Inject constructor(
         }
     }
 
-    override suspend fun load(loadType: LoadType, state: PagingState<Int, HeroEntity>): MediatorResult {
+        override suspend fun load(loadType: LoadType, state: PagingState<Int, HeroEntity>): MediatorResult {
         return try {
             val page = when (loadType) {
                 // init load or invalidate

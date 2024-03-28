@@ -1,4 +1,4 @@
-package com.cp.borutoapp.data.model
+package com.cp.borutoapp.presentation.model
 
 data class Hero(
     val id: Int,
@@ -13,3 +13,4 @@ data class Hero(
     val abilities: List<String>,
     val natureTypes: List<String>
 )
+

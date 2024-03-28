@@ -2,6 +2,7 @@ package com.cp.borutoapp.data.repository
 
 import androidx.paging.PagingData
 import com.cp.borutoapp.data.local.entities.HeroEntity
+import com.cp.borutoapp.presentation.model.Hero
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
