@@ -2,6 +2,15 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="RatingWidgetFiveFilledStarsPreview">
+        <State />
+      </entry>
+      <entry key="RatingWidgetHalfFilledStarsPreview">
+        <State />
+      </entry>
+      <entry key="RatingWidgetZeroFilledStarsPreview">
+        <State />
+      </entry>
       <entry key="SplashScreenDarkThemePreview">
         <State />
       </entry>

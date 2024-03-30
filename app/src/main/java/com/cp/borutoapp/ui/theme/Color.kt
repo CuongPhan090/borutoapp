@@ -21,6 +21,8 @@ val Purple700 = Color(0xFF3700B3)
 val LightGray = Color(0xFFD8D8D8)
 val DarkGray = Color(0xFF2A2A2A)
 
+val StarColor = Color(0xFFFFC94D)
+
 val ColorScheme.welcomeScreenBackgroundColor
     @Composable
     get() = if (isSystemInDarkTheme()) Color.Black else Color.White
