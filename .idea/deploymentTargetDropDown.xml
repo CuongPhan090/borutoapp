@@ -2,6 +2,9 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="CompleteOnBoardingButtonInDarkModePreview">
+        <State />
+      </entry>
       <entry key="RatingWidgetFiveFilledStarsPreview">
         <State />
       </entry>
@@ -12,9 +15,6 @@
         <State />
       </entry>
       <entry key="SplashScreenDarkThemePreview">
-        <State />
-      </entry>
-      <entry key="SplashScreenPreview">
         <State />
       </entry>
       <entry key="app">
