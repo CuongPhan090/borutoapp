@@ -51,7 +51,7 @@ fun HeroItem(hero: Hero, navController: NavHostController) {
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(ratio = 9f / 10f)
-            .clip(RoundedCornerShape(bottomStart = MEDIUM_PADDING, bottomEnd = MEDIUM_PADDING))
+            .clip(RoundedCornerShape(MEDIUM_PADDING))
             .clickable {
                 navController.navigate(Screen.Details.passHeroId(heroId = hero.id))
             }

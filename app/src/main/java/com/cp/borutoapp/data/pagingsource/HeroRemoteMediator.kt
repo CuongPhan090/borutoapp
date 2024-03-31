@@ -1,5 +1,6 @@
 package com.cp.borutoapp.data.pagingsource
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -49,7 +50,7 @@ class HeroRemoteMediator @Inject constructor(
         }
     }
 
-        override suspend fun load(loadType: LoadType, state: PagingState<Int, HeroEntity>): MediatorResult {
+    override suspend fun load(loadType: LoadType, state: PagingState<Int, HeroEntity>): MediatorResult {
         return try {
             val page = when (loadType) {
                 // init load or invalidate
@@ -91,8 +92,8 @@ class HeroRemoteMediator @Inject constructor(
 
             MediatorResult.Success(endOfPaginationReached = response.nextPage == null)
         } catch (e: Exception) {
+            Log.e("BorutoError", e.toString())
             MediatorResult.Error(e)
         }
-
     }
 }

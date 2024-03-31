@@ -12,6 +12,8 @@ import com.cp.borutoapp.data.repository.RemoteDataSource
 import com.cp.borutoapp.data.repository.RemoteDataSourceImpl
 import com.cp.borutoapp.util.Constant.BASE_URL
 import com.cp.borutoapp.util.Constant.BORUTO_DATABASE
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -63,9 +65,13 @@ object BorutoModule {
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        val moshiAdapter = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshiAdapter))
             .client(okHttpClient)
             .build()
     }

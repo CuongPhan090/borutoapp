@@ -8,9 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.cp.borutoapp.ui.theme.LARGE_PADDING
 import com.cp.borutoapp.ui.viewcomponent.ListContent
-import com.cp.borutoapp.ui.viewcomponent.RatingWidget
 
 @Composable
 fun HomeScreen(
