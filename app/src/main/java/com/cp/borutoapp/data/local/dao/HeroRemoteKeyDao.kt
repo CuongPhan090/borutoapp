@@ -10,7 +10,7 @@ import com.cp.borutoapp.data.local.entities.HeroRemoteKeyEntity
 interface HeroRemoteKeyDao {
 
     @Query("SELECT * FROM hero_remote_key_table WHERE id=:id")
-    suspend fun getRemoteKey(id: Int): HeroRemoteKeyEntity
+    suspend fun getRemoteKey(id: Int): HeroRemoteKeyEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addAllRemoteKeys(heroRemoteKeys: List<HeroRemoteKeyEntity>)

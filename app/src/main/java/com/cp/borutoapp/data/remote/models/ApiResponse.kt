@@ -10,7 +10,8 @@ data class ApiResponse(
     val message: String? = null,
     val prevPage: Int? = null,
     val nextPage: Int? = null,
-    val heroes: List<HeroResponse> = emptyList()
+    val heroes: List<HeroResponse> = emptyList(),
+    val lastUpdated: Long? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -47,6 +48,7 @@ fun ApiResponse.toListOfHeroRemoteKeyEntity() =
         HeroRemoteKeyEntity(
             id = it.id,
             prevPage = this.prevPage,
-            nextPage = this.nextPage
+            nextPage = this.nextPage,
+            lastUpdated = lastUpdated
         )
     }

@@ -50,7 +50,22 @@ class HeroRemoteMediator @Inject constructor(
         }
     }
 
-    override suspend fun load(loadType: LoadType, state: PagingState<Int, HeroEntity>): MediatorResult {
+    /**
+     * check whether the cached data is outdated and
+     * decide whether to trigger a remote refresh based on session time out
+     * */
+    override suspend fun initialize(): InitializeAction {
+        val currentTime = System.currentTimeMillis()
+        val lastUpdated = heroRemoteKeyDao.getRemoteKey(id = 1)?.lastUpdated ?: 0
+        val sessionTimeoutInMinutes = 3
+        return if (((currentTime - lastUpdated) / 1000 / 60).toInt() < sessionTimeoutInMinutes)
+            InitializeAction.SKIP_INITIAL_REFRESH else InitializeAction.LAUNCH_INITIAL_REFRESH
+    }
+
+    override suspend fun load(
+        loadType: LoadType,
+        state: PagingState<Int, HeroEntity>
+    ): MediatorResult {
         return try {
             val page = when (loadType) {
                 // init load or invalidate
