@@ -9,6 +9,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.cp.borutoapp.presentation.model.Hero
 import com.cp.borutoapp.ui.theme.SMALL_PADDING
+import kotlin.reflect.jvm.internal.impl.types.error.ErrorScope
 
 @Composable
 fun ListContent(
@@ -34,12 +35,23 @@ fun ListContent(
 @Composable
 fun handlePagingResult(heroes: LazyPagingItems<Hero>): Boolean {
     with(heroes) {
+        val error = when {
+            loadState.refresh is LoadState.Error -> loadState.refresh as? LoadState.Error
+            loadState.prepend is LoadState.Error -> loadState.prepend as? LoadState.Error
+            loadState.append is LoadState.Error -> loadState.append as? LoadState.Error
+            else -> null
+        }
+
         return when {
             loadState.refresh is LoadState.Loading -> {
                 ShimmerEffect()
                 false
             }
-            loadState.refresh is LoadState.Error || loadState.prepend is LoadState.Error || loadState.append is LoadState.Error -> false
+            error != null -> {
+                ErrorScreen(loadState = error)
+                false
+            }
+
             else -> true
         }
     }

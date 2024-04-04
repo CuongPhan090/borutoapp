@@ -5,16 +5,16 @@
       <entry key="CompleteOnBoardingButtonInDarkModePreview">
         <State />
       </entry>
+      <entry key="ErrorScreenInDarkModePreview">
+        <State />
+      </entry>
+      <entry key="HeroItemPreview">
+        <State />
+      </entry>
       <entry key="HeroItemShimmerEffectPreview">
         <State />
       </entry>
       <entry key="HeroItemShimmerEffectPreviewInDarkMode">
-        <State />
-      </entry>
-      <entry key="RatingWidgetHalfFilledStarsPreview">
-        <State />
-      </entry>
-      <entry key="RatingWidgetZeroFilledStarsPreview">
         <State />
       </entry>
       <entry key="app">

@@ -42,7 +42,8 @@ fun HeroItem(hero: Hero, navController: NavHostController) {
     val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
             .data("$BASE_URL${hero.image}")
-            .error(R.drawable.broken_image)
+            .error(R.drawable.ic_placeholder)
+            .placeholder(R.drawable.ic_placeholder)
             .build()
     )
 
