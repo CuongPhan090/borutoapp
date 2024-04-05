@@ -20,17 +20,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.wear.compose.material.ContentAlpha
 import androidx.wear.compose.material.Scaffold
 import com.cp.borutoapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchScreen() {
+fun SearchScreen(
+    viewModel: SearchViewModel = hiltViewModel()
+) {
     val context = LocalContext.current
-    var query by remember {
-        mutableStateOf("")
-    }
+    var query by viewModel.searchQuery
+
     var activeState by remember {
         mutableStateOf(false)
     }
@@ -38,7 +40,9 @@ fun SearchScreen() {
     Scaffold {
         SearchBar(modifier = Modifier.fillMaxWidth(),
             query = query,
-            onQueryChange = { query = it },
+            onQueryChange = {
+                viewModel.updateSearchQuery(it)
+            },
             onSearch = {
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             },
