@@ -51,7 +51,10 @@ fun handlePagingResult(heroes: LazyPagingItems<Hero>): Boolean {
                 ErrorScreen(loadState = error)
                 false
             }
-
+            heroes.itemCount < 1 -> {
+                ErrorScreen()
+                false
+            }
             else -> true
         }
     }

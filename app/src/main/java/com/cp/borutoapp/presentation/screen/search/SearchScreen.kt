@@ -16,26 +16,33 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHost
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.wear.compose.material.ContentAlpha
 import androidx.wear.compose.material.Scaffold
 import com.cp.borutoapp.R
+import com.cp.borutoapp.ui.viewcomponent.ListContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen(
+    navController: NavHostController,
     viewModel: SearchViewModel = hiltViewModel()
 ) {
     var query by viewModel.searchQuery
-
     var activeState by remember {
         mutableStateOf(false)
     }
 
     val heroes = viewModel.searchHeroResults.collectAsLazyPagingItems()
+
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     Scaffold {
         SearchBar(modifier = Modifier.fillMaxWidth(),
@@ -45,6 +52,7 @@ fun SearchScreen(
             },
             onSearch = {
                 viewModel.searchHeroes(query = query)
+                keyboardController?.hide()
             },
             active = activeState,
             onActiveChange = { activeState = it },
@@ -74,12 +82,15 @@ fun SearchScreen(
                     )
                 }
             }
-        ) {}
+        ) {
+            ListContent(heroes = heroes, navController = navController)
+        }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun SearchScreenPreview() {
-    SearchScreen()
+    val navController = rememberNavController()
+    SearchScreen(navController)
 }

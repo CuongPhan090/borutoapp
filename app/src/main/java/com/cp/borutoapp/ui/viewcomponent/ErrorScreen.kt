@@ -35,13 +35,18 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 @Composable
-fun ErrorScreen(loadState: LoadState.Error) {
-    val errorMessage by remember {
+fun ErrorScreen(loadState: LoadState.Error? = null) {
+    var errorMessage by remember {
         mutableStateOf(parseErrorMessage(loadState))
     }
 
-    val icon by remember {
+    var icon by remember {
         mutableIntStateOf(R.drawable.ic_network_error)
+    }
+
+    if (loadState == null) {
+        errorMessage = "Find Your Favorite Hero"
+        icon = R.drawable.ic_search_document
     }
 
     // One time animation
@@ -89,8 +94,8 @@ private fun ErrorScreenContent(alphaAnim: Float, icon: Int, errorMessage: String
     }
 }
 
-fun parseErrorMessage(error: LoadState.Error): String {
-    return when (error.error) {
+fun parseErrorMessage(error: LoadState.Error?): String {
+    return when (error?.error) {
         is SocketTimeoutException -> "Server Unavailable"
         is ConnectException -> "Internal Unavailable"
         else -> "Unknown Error"

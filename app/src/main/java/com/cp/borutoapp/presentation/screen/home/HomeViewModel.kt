@@ -19,5 +19,5 @@ class HomeViewModel @Inject constructor(
         pagingData.map {
             it.toHero()
         }
-    }.cachedIn(viewModelScope)
+    }
 }
