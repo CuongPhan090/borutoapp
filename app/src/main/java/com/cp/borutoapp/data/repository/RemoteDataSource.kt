@@ -7,13 +7,15 @@ import androidx.paging.PagingData
 import com.cp.borutoapp.data.local.BorutoDatabase
 import com.cp.borutoapp.data.local.entities.HeroEntity
 import com.cp.borutoapp.data.pagingsource.HeroRemoteMediator
+import com.cp.borutoapp.data.pagingsource.SearchHeroesPagingSource
 import com.cp.borutoapp.data.remote.BorutoApi
+import com.cp.borutoapp.data.remote.models.HeroResponse
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface RemoteDataSource {
     fun getAllHeroes(): Flow<PagingData<HeroEntity>>
-    fun searchHeroes(): Flow<PagingData<HeroEntity>>
+    fun searchHeroes(query: String): Flow<PagingData<HeroResponse>>
 }
 
 @OptIn(ExperimentalPagingApi::class)
@@ -34,7 +36,12 @@ class RemoteDataSourceImpl @Inject constructor(
         ).flow
     }
 
-    override fun searchHeroes(): Flow<PagingData<HeroEntity>> {
-        TODO("Not yet implemented")
+    override fun searchHeroes(query: String): Flow<PagingData<HeroResponse>> {
+        return Pager(
+            config = PagingConfig(pageSize = 3),
+            pagingSourceFactory = {
+                SearchHeroesPagingSource(borutoApi = borutoApi, query = query)
+            }
+        ).flow
     }
 }

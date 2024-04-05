@@ -2,6 +2,7 @@ package com.cp.borutoapp.data.remote.models
 
 import com.cp.borutoapp.data.local.entities.HeroEntity
 import com.cp.borutoapp.data.local.entities.HeroRemoteKeyEntity
+import com.cp.borutoapp.presentation.model.Hero
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
@@ -30,6 +31,20 @@ data class HeroResponse(
 )
 
 fun HeroResponse.toHeroEntity() = HeroEntity(
+    id = id,
+    name = name,
+    image = image,
+    about = about,
+    rating = rating,
+    power = power,
+    month = month,
+    day = day,
+    family = family,
+    abilities = abilities,
+    natureTypes = natureTypes
+)
+
+fun HeroResponse.toHero() = Hero(
     id = id,
     name = name,
     image = image,
