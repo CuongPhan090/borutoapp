@@ -2,9 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="CompleteOnBoardingButtonInDarkModePreview">
-        <State />
-      </entry>
       <entry key="ErrorScreenInDarkModePreview">
         <State />
       </entry>
@@ -15,6 +12,9 @@
         <State />
       </entry>
       <entry key="HeroItemShimmerEffectPreviewInDarkMode">
+        <State />
+      </entry>
+      <entry key="SearchScreenPreview">
         <State />
       </entry>
       <entry key="app">
