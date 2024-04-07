@@ -1,8 +1,7 @@
-package com.cp.borutoapp.ui.viewcomponent
+package com.cp.borutoapp.ui.sharedviewcomponent
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.core.FastOutLinearInEasing
-import androidx.compose.animation.core.InfiniteRepeatableSpec
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable

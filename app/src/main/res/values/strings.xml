@@ -9,5 +9,6 @@
     <string name="network_error_icon">Network Error Icon</string>
     <string name="search_here">Search here...</string>
     <string name="close_icon">close icon</string>
+    <string name="info_icon">Info Icon</string>
 
 </resources>

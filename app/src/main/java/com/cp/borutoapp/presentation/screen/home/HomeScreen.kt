@@ -9,7 +9,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.cp.borutoapp.navigation.Screen
-import com.cp.borutoapp.ui.viewcomponent.ListContent
+import com.cp.borutoapp.ui.sharedviewcomponent.ListContent
 
 @Composable
 fun HomeScreen(

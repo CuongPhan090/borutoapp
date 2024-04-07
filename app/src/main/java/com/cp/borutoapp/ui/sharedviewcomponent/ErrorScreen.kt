@@ -1,4 +1,4 @@
-package com.cp.borutoapp.ui.viewcomponent
+package com.cp.borutoapp.ui.sharedviewcomponent
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.core.animateFloatAsState

@@ -1,4 +1,4 @@
-package com.cp.borutoapp.ui.viewcomponent
+package com.cp.borutoapp.ui.sharedviewcomponent
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement

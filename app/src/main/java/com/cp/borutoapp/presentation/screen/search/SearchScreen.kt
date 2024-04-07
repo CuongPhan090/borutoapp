@@ -20,14 +20,13 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.wear.compose.material.ContentAlpha
 import androidx.wear.compose.material.Scaffold
 import com.cp.borutoapp.R
-import com.cp.borutoapp.ui.viewcomponent.ListContent
+import com.cp.borutoapp.ui.sharedviewcomponent.ListContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
