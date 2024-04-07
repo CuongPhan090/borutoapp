@@ -8,6 +8,8 @@ import com.cp.borutoapp.data.repository.BorutoRepository
 import com.cp.borutoapp.data.repository.BorutoRepositoryImpl
 import com.cp.borutoapp.data.repository.DataStoreOperationImpl
 import com.cp.borutoapp.data.repository.DataStoreOperations
+import com.cp.borutoapp.data.repository.LocalDataSource
+import com.cp.borutoapp.data.repository.LocalDataSourceImpl
 import com.cp.borutoapp.data.repository.RemoteDataSource
 import com.cp.borutoapp.data.repository.RemoteDataSourceImpl
 import com.cp.borutoapp.util.Constant.BASE_URL
@@ -45,11 +47,13 @@ object BorutoModule {
     @Singleton
     fun provideBorutoRepository(
         dataStoreOperationsImpl: DataStoreOperations,
-        remoteDataSource: RemoteDataSource
+        remoteDataSource: RemoteDataSource,
+        localDataSource: LocalDataSource
     ): BorutoRepository {
         return BorutoRepositoryImpl(
             dataStoreOperations = dataStoreOperationsImpl,
-            remoteDataSource = remoteDataSource
+            remoteDataSource = remoteDataSource,
+            localDataSource = localDataSource
         )
     }
 
@@ -92,5 +96,11 @@ object BorutoModule {
             borutoDatabase = borutoDatabase,
             borutoApi = borutoApi
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocalDataSource(borutoDatabase: BorutoDatabase): LocalDataSource {
+        return LocalDataSourceImpl(borutoDatabase = borutoDatabase)
     }
 }
