@@ -12,7 +12,7 @@ interface BorutoRepository {
     suspend fun saveOnBoardingState(completed: Boolean)
     fun readOnBoardingState(): Flow<Boolean>
     fun getAllHeroes(): Flow<PagingData<HeroEntity>>
-    suspend fun getSelectedHeroes(heroId: String): HeroEntity
+    suspend fun getSelectedHeroes(heroId: Int): HeroEntity
     fun searchHeroes(query: String): Flow<PagingData<HeroResponse>>
 }
 
@@ -34,7 +34,7 @@ class BorutoRepositoryImpl @Inject constructor(
         return remoteDataSource.getAllHeroes()
     }
 
-    override suspend fun getSelectedHeroes(heroId: String): HeroEntity {
+    override suspend fun getSelectedHeroes(heroId: Int): HeroEntity {
         return localDataSource.getSelectedHero(heroId = heroId)
     }
 
