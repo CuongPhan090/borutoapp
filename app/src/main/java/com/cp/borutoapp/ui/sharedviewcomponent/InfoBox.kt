@@ -71,7 +71,7 @@ fun InfoBoxPreview() {
         iconColor = Color.Blue,
         bigText = "90",
         smallText = "Power",
-        textColor = MaterialTheme.colorScheme.titleColor
+        textColor = titleColor
     )
 }
 
@@ -83,6 +83,6 @@ fun InfoBoxPreviewInDarkMode() {
         iconColor = Color.Blue,
         bigText = "90",
         smallText = "Power",
-        textColor = MaterialTheme.colorScheme.titleColor
+        textColor = titleColor
     )
 }

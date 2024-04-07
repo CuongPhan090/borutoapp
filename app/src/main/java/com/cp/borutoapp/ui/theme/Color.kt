@@ -2,7 +2,6 @@ package com.cp.borutoapp.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
@@ -31,7 +30,7 @@ val ColorScheme.welcomeScreenBackgroundColor
     @Composable
     get() = if (isSystemInDarkTheme()) Color.Black else Color.White
 
-val ColorScheme.titleColor
+val titleColor
     @Composable
     get() = if (isSystemInDarkTheme()) LightGray else DarkGray
 

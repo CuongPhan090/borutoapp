@@ -1,6 +1,5 @@
 package com.cp.borutoapp.ui.sharedviewcomponent
 
-import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -46,12 +45,12 @@ fun OrderedList(
 @Preview(showBackground = true)
 @Composable
 fun OrderedListPreview() {
-    OrderedList(title = "Family", items = listOf("Minato", "Kushina"), textColor = MaterialTheme.colorScheme.titleColor)
+    OrderedList(title = "Family", items = listOf("Minato", "Kushina"), textColor = titleColor)
 }
 
 
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES, backgroundColor = 0xFF000000)
 @Composable
 fun OrderedListPreviewInDarkMode() {
-    OrderedList(title = "Family", items = listOf("Minato", "Kushina"), textColor = MaterialTheme.colorScheme.titleColor)
+    OrderedList(title = "Family", items = listOf("Minato", "Kushina"), textColor = titleColor)
 }

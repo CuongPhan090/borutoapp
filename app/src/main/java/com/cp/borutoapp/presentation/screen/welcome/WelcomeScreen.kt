@@ -138,7 +138,7 @@ fun PagerScreen(onBoardingPage: OnBoardingPage) {
         )
         Text(
             text = onBoardingPage.title,
-            color = MaterialTheme.colorScheme.titleColor,
+            color = titleColor,
             fontSize = MaterialTheme.typography.headlineMedium.fontSize,
             fontWeight = FontWeight.Bold,
         )
