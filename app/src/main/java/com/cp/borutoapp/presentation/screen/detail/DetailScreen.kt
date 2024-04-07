@@ -1,6 +1,7 @@
 package com.cp.borutoapp.presentation.screen.detail
 
 import android.util.Log
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetScaffoldState
 import androidx.compose.material.BottomSheetValue.Collapsed
@@ -38,6 +40,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
@@ -48,6 +51,7 @@ import com.cp.borutoapp.ui.sharedviewcomponent.InfoBox
 import com.cp.borutoapp.ui.sharedviewcomponent.OrderedList
 import com.cp.borutoapp.ui.theme.BOTTOM_SHEET_PEEK_HEIGHT
 import com.cp.borutoapp.ui.theme.CLOSE_ICON_SIZE
+import com.cp.borutoapp.ui.theme.EXTRA_LARGE_PADDING
 import com.cp.borutoapp.ui.theme.INFO_BOX_ICON_SIZE
 import com.cp.borutoapp.ui.theme.MEDIUM_PADDING
 import com.cp.borutoapp.ui.theme.SMALL_PADDING
@@ -68,9 +72,14 @@ fun DetailScreen(
     )
 
     val currentBottomSheetFraction = bottomSheetScaffoldState.currentBottomSheetFraction
-    Log.d("LogMe", "currentBottomSheetFraction: $currentBottomSheetFraction")
+
+    val radiusAnim by animateDpAsState(
+        targetValue = if (currentBottomSheetFraction == 1f) EXTRA_LARGE_PADDING else 0.dp,
+        label = ""
+    )
 
     BottomSheetScaffold(
+        sheetShape = RoundedCornerShape(size = radiusAnim),
         scaffoldState = bottomSheetScaffoldState,
         sheetPeekHeight = BOTTOM_SHEET_PEEK_HEIGHT,
         sheetContent = {
@@ -93,7 +102,6 @@ val BottomSheetScaffoldState.currentBottomSheetFraction: Float
         val fraction = bottomSheetState.progress
         val targetValue = bottomSheetState.targetValue
         val currentValue = bottomSheetState.currentValue
-        Log.d("LogMe", "fraction: $fraction")
         return when {
             currentValue == Collapsed && targetValue == Collapsed -> 1f
             currentValue == Expanded && targetValue == Expanded -> 0f
