@@ -82,9 +82,8 @@ fun SearchScreen(
                     )
                 }
             }
-        ) {
-            ListContent(heroes = heroes, navController = navController)
-        }
+        ) {}
+        ListContent(heroes = heroes, navController = navController)
     }
 }
 

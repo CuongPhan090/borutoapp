@@ -9,6 +9,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -29,22 +35,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
 import com.cp.borutoapp.R
+import com.cp.borutoapp.presentation.model.Hero
 import com.cp.borutoapp.ui.theme.SMALL_PADDING
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 @Composable
-fun ErrorScreen(loadState: LoadState.Error? = null) {
+fun ErrorScreen(error: LoadState.Error? = null, heroes: LazyPagingItems<Hero>? = null) {
     var errorMessage by remember {
-        mutableStateOf(parseErrorMessage(loadState))
+        mutableStateOf(parseErrorMessage(error))
     }
 
     var icon by remember {
         mutableIntStateOf(R.drawable.ic_network_error)
     }
 
-    if (loadState == null) {
+    if (error == null) {
         errorMessage = "Find Your Favorite Hero"
         icon = R.drawable.ic_search_document
     }
@@ -63,34 +71,72 @@ fun ErrorScreen(loadState: LoadState.Error? = null) {
         startAnimation = true
     }
 
-    ErrorScreenContent(alphaAnim, icon, errorMessage)
+    ErrorScreenContent(
+        alphaAnim = alphaAnim,
+        icon = icon,
+        errorMessage = errorMessage,
+        heroes = heroes,
+        error = error
+    )
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-private fun ErrorScreenContent(alphaAnim: Float, icon: Int, errorMessage: String) {
+private fun ErrorScreenContent(
+    alphaAnim: Float,
+    icon: Int,
+    errorMessage: String,
+    heroes: LazyPagingItems<Hero>? = null,
+    error: LoadState.Error? = null
+) {
+
+    var isRefreshing by remember {
+        mutableStateOf(false)
+    }
+
+    val refreshState = rememberPullRefreshState(
+        refreshing = isRefreshing,
+        onRefresh = {
+            isRefreshing = true
+            heroes?.refresh()
+            isRefreshing = false
+        })
+
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .pullRefresh(state = refreshState, enabled = error != null),
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Icon(
-            modifier = Modifier
-                .size(150.dp)
-                .alpha(alpha = alphaAnim),
-            painter = painterResource(id = icon),
-            contentDescription = stringResource(R.string.network_error_icon),
-            tint = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray
-        )
+        PullRefreshIndicator(refreshing = isRefreshing, state = refreshState)
 
-        Text(
+        Column(
             modifier = Modifier
-                .padding(vertical = SMALL_PADDING)
-                .alpha(alpha = alphaAnim),
-            text = errorMessage,
-            fontSize = MaterialTheme.typography.bodyMedium.fontSize,
-            fontWeight = FontWeight.Medium,
-            color = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray
-        )
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                modifier = Modifier
+                    .size(150.dp)
+                    .alpha(alpha = alphaAnim),
+                painter = painterResource(id = icon),
+                contentDescription = stringResource(R.string.network_error_icon),
+                tint = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray
+            )
+
+            Text(
+                modifier = Modifier
+                    .padding(vertical = SMALL_PADDING)
+                    .alpha(alpha = alphaAnim),
+                text = errorMessage,
+                fontSize = MaterialTheme.typography.bodyMedium.fontSize,
+                fontWeight = FontWeight.Medium,
+                color = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray
+            )
+        }
     }
 }
 

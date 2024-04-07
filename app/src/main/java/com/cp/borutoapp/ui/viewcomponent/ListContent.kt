@@ -9,7 +9,6 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.cp.borutoapp.presentation.model.Hero
 import com.cp.borutoapp.ui.theme.SMALL_PADDING
-import kotlin.reflect.jvm.internal.impl.types.error.ErrorScope
 
 @Composable
 fun ListContent(
@@ -48,7 +47,7 @@ fun handlePagingResult(heroes: LazyPagingItems<Hero>): Boolean {
                 false
             }
             error != null -> {
-                ErrorScreen(loadState = error)
+                ErrorScreen(error = error, heroes = heroes)
                 false
             }
             heroes.itemCount < 1 -> {
