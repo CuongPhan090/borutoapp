@@ -57,7 +57,7 @@ class HeroRemoteMediator @Inject constructor(
     override suspend fun initialize(): InitializeAction {
         val currentTime = System.currentTimeMillis()
         val lastUpdated = heroRemoteKeyDao.getRemoteKey(id = 1)?.lastUpdated ?: 0
-        val sessionTimeoutInMinutes = 3
+        val sessionTimeoutInMinutes = 525600 // 1 Year
         return if (((currentTime - lastUpdated) / 1000 / 60).toInt() < sessionTimeoutInMinutes)
             InitializeAction.SKIP_INITIAL_REFRESH else InitializeAction.LAUNCH_INITIAL_REFRESH
     }

@@ -112,4 +112,7 @@ dependencies {
 
     // Coil Compose
     implementation("io.coil-kt:coil-compose:2.6.0")
+
+    // ColorPalette API
+    implementation("androidx.palette:palette:1.0.0")
 }
