@@ -24,13 +24,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import androidx.wear.compose.material.ContentAlpha
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.cp.borutoapp.R
-import com.cp.borutoapp.navigation.Screen
 import com.cp.borutoapp.presentation.model.Hero
 import com.cp.borutoapp.ui.theme.MEDIUM_PADDING
 import com.cp.borutoapp.ui.theme.SMALL_PADDING
@@ -38,7 +35,7 @@ import com.cp.borutoapp.ui.theme.topAppBarContentColor
 import com.cp.borutoapp.util.Constant.BASE_URL
 
 @Composable
-fun HeroItem(hero: Hero, navController: NavHostController) {
+fun HeroItem(hero: Hero, onItemClick: ((Int) -> Unit)) {
     val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
             .data("$BASE_URL${hero.image}")
@@ -53,7 +50,7 @@ fun HeroItem(hero: Hero, navController: NavHostController) {
             .aspectRatio(ratio = 9f / 10f)
             .clip(RoundedCornerShape(MEDIUM_PADDING))
             .clickable {
-                navController.navigate(Screen.Details.passHeroId(heroId = hero.id))
+                onItemClick(hero.id)
             }
     ) {
         Image(
@@ -101,7 +98,6 @@ fun HeroItem(hero: Hero, navController: NavHostController) {
 @Preview(showBackground = true)
 @Composable
 fun HeroItemPreview() {
-    val navController = rememberNavController()
     val hero = Hero(
         id = 1,
         name = "Sasuke",
@@ -121,13 +117,12 @@ fun HeroItemPreview() {
             "Lightning", "Fire", "Wind", "Earth", "Water"
         )
     )
-    HeroItem(hero, navController)
+    HeroItem(hero, {})
 }
 
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES, backgroundColor = 0x000000)
 @Composable
 fun HeroItemPreviewInDarkMode() {
-    val navController = rememberNavController()
     val hero = Hero(
         id = 1,
         name = "Sasuke",
@@ -147,5 +142,5 @@ fun HeroItemPreviewInDarkMode() {
             "Lightning", "Fire", "Wind", "Earth", "Water"
         )
     )
-    HeroItem(hero, navController)
+    HeroItem(hero, {})
 }

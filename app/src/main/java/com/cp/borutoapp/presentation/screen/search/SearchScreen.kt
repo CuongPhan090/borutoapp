@@ -20,8 +20,6 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.wear.compose.material.ContentAlpha
 import androidx.wear.compose.material.Scaffold
@@ -31,7 +29,7 @@ import com.cp.borutoapp.ui.sharedviewcomponent.ListContent
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen(
-    navController: NavHostController,
+    onNavigateToDetail: ((Int) -> Unit),
     viewModel: SearchViewModel = hiltViewModel()
 ) {
     var query by viewModel.searchQuery
@@ -82,13 +80,12 @@ fun SearchScreen(
                 }
             }
         ) {}
-        ListContent(heroes = heroes, navController = navController)
+        ListContent(heroes = heroes, onItemClick = onNavigateToDetail)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun SearchScreenPreview() {
-    val navController = rememberNavController()
-    SearchScreen(navController)
+    SearchScreen({})
 }

@@ -12,12 +12,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val borutoRepository: BorutoRepository
+    borutoRepository: BorutoRepository
 ) : ViewModel() {
 
-    fun getAllHeroes() = borutoRepository.getAllHeroes().map { pagingData ->
+    val allHeroes = borutoRepository.getAllHeroes().map { pagingData ->
         pagingData.map {
             it.toHero()
         }
-    }
+    }.cachedIn(viewModelScope)
 }

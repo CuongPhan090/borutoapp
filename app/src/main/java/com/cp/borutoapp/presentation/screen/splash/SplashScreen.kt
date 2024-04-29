@@ -1,6 +1,5 @@
 package com.cp.borutoapp.presentation.screen.splash
 
-import android.annotation.SuppressLint
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -23,16 +22,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.cp.borutoapp.R
-import com.cp.borutoapp.navigation.Screen
 import com.cp.borutoapp.ui.theme.Purple500
 import com.cp.borutoapp.ui.theme.Purple700
 
 @Composable
 fun SplashScreen(
-    navController: NavHostController,
-    splashViewModel: SplashViewModel = hiltViewModel()
+    splashViewModel: SplashViewModel = hiltViewModel(),
+    onNavigateToWelcome: () -> Unit,
+    onNavigateToHome: () -> Unit
 ) {
     val rotationDegree = remember { Animatable(initialValue = 0f) }
     val shouldSkipOnBoarding by splashViewModel.shouldSkipOnBoarding.collectAsState()
@@ -45,11 +43,11 @@ fun SplashScreen(
             )
         )
 
-        navController.popBackStack()
+//        navController.popBackStack()
         if (shouldSkipOnBoarding) {
-            navController.navigate(route = Screen.Home.route)
+            onNavigateToHome()
         } else {
-            navController.navigate(route = Screen.Welcome.route)
+            onNavigateToWelcome()
         }
     }
 

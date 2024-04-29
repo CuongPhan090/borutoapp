@@ -6,28 +6,27 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.cp.borutoapp.navigation.Screen
 import com.cp.borutoapp.ui.sharedviewcomponent.ListContent
 
 @Composable
 fun HomeScreen(
-    navController: NavHostController,
+    onNavigateToSearch: (() -> Unit),
+    onNavigateToDetail: ((Int) -> Unit),
     viewModel: HomeViewModel = hiltViewModel()
 ) {
 
-    val allHeroes = viewModel.getAllHeroes().collectAsLazyPagingItems()
+    val allHeroes = viewModel.allHeroes.collectAsLazyPagingItems()
 
     Scaffold(
         topBar = {
             HomeTopBar(onSearchClick = {
-                navController.navigate(Screen.Search.route)
+                onNavigateToSearch()
             })
         }
     ) { padding ->
         Column(modifier = Modifier.padding(padding)) {
-            ListContent(heroes = allHeroes, navController = navController)
+            ListContent(heroes = allHeroes, onItemClick = onNavigateToDetail)
         }
     }
 }
