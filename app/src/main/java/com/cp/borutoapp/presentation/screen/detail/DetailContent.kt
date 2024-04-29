@@ -53,8 +53,8 @@ import com.cp.borutoapp.ui.sharedviewcomponent.InfoBox
 import com.cp.borutoapp.ui.sharedviewcomponent.OrderedList
 import com.cp.borutoapp.ui.theme.BOTTOM_SHEET_PEEK_HEIGHT
 import com.cp.borutoapp.ui.theme.CLOSE_ICON_SIZE
-import com.cp.borutoapp.ui.theme.EXTRA_LARGE_PADDING
 import com.cp.borutoapp.ui.theme.INFO_BOX_ICON_SIZE
+import com.cp.borutoapp.ui.theme.LARGE_PADDING
 import com.cp.borutoapp.ui.theme.MEDIUM_PADDING
 import com.cp.borutoapp.ui.theme.SMALL_PADDING
 import com.cp.borutoapp.ui.theme.titleColor
@@ -84,7 +84,7 @@ fun DetailContent(
     val currentBottomSheetFraction = bottomSheetScaffoldState.currentBottomSheetFraction
 
     val radiusAnim by animateDpAsState(
-        targetValue = if (currentBottomSheetFraction == 1f) EXTRA_LARGE_PADDING else 0.dp,
+        targetValue = if (currentBottomSheetFraction == 1f) LARGE_PADDING else 0.dp,
         label = ""
     )
 
@@ -142,6 +142,7 @@ fun BottomSheetContent(
         modifier = Modifier
             .background(color = sheetBackgroundColor)
             .fillMaxWidth()
+            .fillMaxHeight(0.65f)
             .padding(vertical = MEDIUM_PADDING, horizontal = SMALL_PADDING)
     ) {
         Row(
@@ -256,7 +257,7 @@ fun DetailContent(
             .background(backgroundColor)
     ) {
         Image(
-            modifier = Modifier.fillMaxHeight(fraction = imageFraction + 0.55f),
+            modifier = Modifier.fillMaxHeight(fraction = imageFraction + 0.35f).fillMaxWidth(),
             painter = painter,
             contentDescription = stringResource(R.string.hero_image),
             contentScale = ContentScale.Crop

@@ -11,5 +11,5 @@ object Constant {
 
     const val DATA_STORE_OPERATIONS = "data_store_operations"
 
-    const val BASE_URL = "https://borutoserver-rcvb.onrender.com/"
+    const val BASE_URL = "https://borutoserver-rcvb.onrender.com"
 }
