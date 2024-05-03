@@ -64,7 +64,7 @@ import com.cp.borutoapp.util.Constant
 @Composable
 fun DetailContent(
     selectedHero: Hero?,
-    navController: NavHostController,
+    onCloseClick: () -> Unit,
     colors: Map<String, String>
 ) {
     var vibrant by remember { mutableStateOf("#000000") }
@@ -109,7 +109,7 @@ fun DetailContent(
                 imageFraction = currentBottomSheetFraction,
                 backgroundColor = Color(parseColor(darkVibrant))
             ) {
-                navController.popBackStack()
+                onCloseClick()
             }
         }
     }

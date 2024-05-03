@@ -62,11 +62,15 @@ fun SetUpNavGraph(
             )
         }
         composable(
-            route = Screen.Details.route, arguments = listOf(navArgument(DETAILS_ARGUMENT_KEY) {
+            route = Screen.Details.route,
+            arguments = listOf(navArgument(DETAILS_ARGUMENT_KEY) {
                 type = NavType.IntType
             })
         ) {
-            DetailScreen(navController = navHostController)
+                DetailScreen(onCloseClick = {
+                    navHostController.popBackStack()
+                }
+            )
         }
     }
 }

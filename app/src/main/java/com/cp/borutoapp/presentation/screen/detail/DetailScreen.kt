@@ -6,7 +6,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.cp.borutoapp.util.Constant.BASE_URL
 import com.cp.borutoapp.util.PaletteGenerator.convertImageUrlToBitMap
 import com.cp.borutoapp.util.PaletteGenerator.extractColorsFromBitmap
@@ -14,16 +13,14 @@ import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun DetailScreen(
-    navController: NavHostController,
+    onCloseClick: () -> Unit,
     viewModel: DetailScreenViewModel = hiltViewModel()
 ) {
-
     val selectedHero by viewModel.selectedHero.collectAsState()
     val colorPalette by viewModel.colorPalette
 
-
     if (colorPalette.isNotEmpty()) {
-        DetailContent(selectedHero = selectedHero, navController = navController, colors = colorPalette)
+        DetailContent(selectedHero = selectedHero, onCloseClick = onCloseClick, colors = colorPalette)
     } else {
         viewModel.generateColorPalette()
     }

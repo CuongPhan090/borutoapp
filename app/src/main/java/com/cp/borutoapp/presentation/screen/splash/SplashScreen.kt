@@ -43,7 +43,6 @@ fun SplashScreen(
             )
         )
 
-//        navController.popBackStack()
         if (shouldSkipOnBoarding) {
             onNavigateToHome()
         } else {

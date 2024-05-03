@@ -1,6 +1,7 @@
 package com.cp.borutoapp.presentation.screen.search
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -42,45 +43,48 @@ fun SearchScreen(
     val keyboardController = LocalSoftwareKeyboardController.current
 
     Scaffold {
-        SearchBar(modifier = Modifier.fillMaxWidth(),
-            query = query,
-            onQueryChange = {
-                viewModel.updateSearchQuery(it)
-            },
-            onSearch = {
-                viewModel.searchHeroes(query = query)
-                keyboardController?.hide()
-            },
-            active = activeState,
-            onActiveChange = { activeState = it },
-            placeholder = {
-                Text(
-                    text = stringResource(id = R.string.search_here),
-                    color = Color.Black.copy(alpha = ContentAlpha.medium),
-                )
-            },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = stringResource(id = R.string.search_icon),
-                    tint = Color.Black.copy(alpha = ContentAlpha.medium)
-                )
-            },
-            trailingIcon = {
-                if (activeState) {
-                    Icon(
-                        modifier = Modifier.clickable {
-                            query = ""
-                            activeState = false
-                        },
-                        imageVector = Icons.Default.Close,
-                        contentDescription = stringResource(id = R.string.close_icon),
-                        tint = Color.Black
+        Column {
+            SearchBar(modifier = Modifier.fillMaxWidth(),
+                query = query,
+                onQueryChange = {
+                    viewModel.updateSearchQuery(it)
+                },
+                onSearch = {
+                    viewModel.searchHeroes(query = query)
+                    keyboardController?.hide()
+                    activeState = false
+                },
+                active = activeState,
+                onActiveChange = { activeState = it },
+                placeholder = {
+                    Text(
+                        text = stringResource(id = R.string.search_here),
+                        color = Color.Black.copy(alpha = ContentAlpha.medium),
                     )
+                },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = stringResource(id = R.string.search_icon),
+                        tint = Color.Black.copy(alpha = ContentAlpha.medium)
+                    )
+                },
+                trailingIcon = {
+                    if (activeState) {
+                        Icon(
+                            modifier = Modifier.clickable {
+                                query = ""
+                                activeState = false
+                            },
+                            imageVector = Icons.Default.Close,
+                            contentDescription = stringResource(id = R.string.close_icon),
+                            tint = Color.Black
+                        )
+                    }
                 }
-            }
-        ) {}
-        ListContent(heroes = heroes, onItemClick = onNavigateToDetail)
+            ) {}
+            ListContent(heroes = heroes, onItemClick = onNavigateToDetail)
+        }
     }
 }
 
